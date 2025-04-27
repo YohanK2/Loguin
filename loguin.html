@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="Icon" type="image/png" href="multimedia/1000946.png">
+
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+
+  <div id="container" class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
+  </div>
+
+  <script>
+    function showLogin() {
+      document.getElementById('container').innerHTML = `
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Iniciar Sesión</h2>
+        <form onsubmit="login(event)" class="space-y-6">
+          <div>
+            <label class="block mb-2 text-sm font-medium text-gray-700">Nombre de Usuario</label>
+            <input type="text" id="login-usuario" required
+                   class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400">
+          </div>
+          <div>
+            <label class="block mb-2 text-sm font-medium text-gray-700">Contraseña</label>
+            <input type="password" id="login-password" required
+                   class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400">
+          </div>
+          <button type="submit"
+                  class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-lg transition">
+            Iniciar Sesión
+          </button>
+          <div class="text-center mt-4 space-y-2">
+            <p class="text-sm">
+              ¿No tienes usuario?
+              <a href="#" class="text-purple-600 font-bold" onclick="showRegister()">¡Crea uno!</a>
+            </p>
+            <p class="text-sm">
+              <a href="#" class="text-purple-600 font-bold" onclick="showRecover()">¿Olvidaste tu contraseña?</a>
+            </p>
+          </div>
+        </form>
+      `;
+    }
+
+    function showRegister() {
+      document.getElementById('container').innerHTML = `
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Crear Cuenta</h2>
+        <form onsubmit="register(event)" class="space-y-4">
+          <div>
+            <label class="block mb-2 text-sm font-medium text-gray-700">Nombre completo</label>
+            <input type="text" id="reg-nombre" required class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400">
+          </div>
+          <div>
+            <label class="block mb-2 text-sm font-medium text-gray-700">Número de Teléfono</label>
+            <input type="number" id="reg-telefono" required class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400">
+          </div>
+          <div>
+            <label class="block mb-2 text-sm font-medium text-gray-700">Número de Cédula</label>
+            <input type="number" id="reg-cedula" required class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400">
+          </div>
+          <div>
+            <label class="block mb-2 text-sm font-medium text-gray-700">Correo Electrónico</label>
+            <input type="email" id="reg-email" required class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400">
+          </div>
+          <div>
+            <label class="block mb-2 text-sm font-medium text-gray-700">Nombre de Usuario</label>
+            <input type="text" id="reg-usuario" required class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder:"Ejemplo: Yohan123">
+          </div>
+          <div>
+            <label class="block mb-2 text-sm font-medium text-gray-700">Contraseña</label>
+            <input type="password" id="reg-password" required class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder:"Debe tener minimo 8 caracteres mayúscula, al menos un número y caracter especial">
+          </div>
+          <button type="submit"
+                  class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition">
+            Crear Cuenta
+          </button>
+          <div class="text-center mt-4">
+            <a href="#" class="text-purple-600 font-bold" onclick="showLogin()">¿Ya tienes cuenta? Inicia sesión</a>
+          </div>
+        </form>
+      `;
+    }
+
+    function showRecover() {
+      document.getElementById('container').innerHTML = `
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Recuperar Contraseña</h2>
+        <form onsubmit="recover(event)" class="space-y-6">
+          <div>
+            <label class="block mb-2 text-sm font-medium text-gray-700">Correo Electrónico</label>
+            <input type="email" id="recover-email" required
+                   class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400">
+          </div>
+          <button type="submit"
+                  class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition">
+            Recuperar
+          </button>
+          <div class="text-center mt-4">
+            <a href="#" class="text-purple-600 font-bold" onclick="showLogin()">Volver al inicio de sesión</a>
+          </div>
+        </form>
+      `;
+    }
+
+        function login(event) {
+      event.preventDefault();
+      Swal.fire({
+        icon: 'success',
+        title: '¡Bienvenido!',
+        text: 'Inicio de sesión exitoso.',
+        confirmButtonColor: '#8b5cf6'
+      });
+    }
+
+    function register(event) {
+      event.preventDefault();
+      Swal.fire({
+        icon: 'success',
+        title: '¡Cuenta creada!',
+        text: 'Tu cuenta ha sido registrada correctamente.',
+        confirmButtonColor: '#22c55e'
+      });
+    }
+
+    function recover(event) {
+      event.preventDefault();
+      Swal.fire({
+        icon: 'info',
+        title: '¡Recuperación enviada!',
+        text: 'Hemos enviado un correo para recuperar tu contraseña.',
+        confirmButtonColor: '#3b82f6'
+      });
+    }
+
+    showLogin();
+  </script>
+
+<audio id="audio-fondo" hidden loop>
+  <source src="multimedia/mini.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  window.addEventListener('load', function() {
+    const audio = document.getElementById('audio-fondo');
+    audio.play().catch(e => {
+      console.log('El navegador bloqueó el autoplay. Se reproducirá después de una interacción.');
+    });
+  });
+</script>
+
+</body>
+</html>
