@@ -105,26 +105,72 @@
       `;
     }
 
-        function login(event) {
-      event.preventDefault();
-      Swal.fire({
-        icon: 'success',
-        title: '¡Bienvenido!',
-        text: 'Inicio de sesión exitoso.',
-        confirmButtonColor: '#8b5cf6'
-      });
-    }
+ function login(event) {
+  event.preventDefault();
+  const usuarioIngresado = document.getElementById('login-usuario').value;
+  const passwordIngresado = document.getElementById('login-password').value;
 
-    function register(event) {
-      event.preventDefault();
-      Swal.fire({
-        icon: 'success',
-        title: '¡Cuenta creada!',
-        text: 'Tu cuenta ha sido registrada correctamente.',
-        confirmButtonColor: '#22c55e'
-      });
-    }
+  const usuarioData = localStorage.getItem(usuarioIngresado);
 
+  if (!usuarioData) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Usuario no encontrado',
+      text: 'Este usuario no está registrado.',
+      confirmButtonColor: '#ef4444'
+    });
+    return;
+  }
+
+  const datos = JSON.parse(usuarioData);
+
+  if (datos.password === passwordIngresado) {
+    Swal.fire({
+      icon: 'success',
+      title: '¡Bienvenido!',
+      text: 'Inicio de sesión exitoso.',
+      confirmButtonColor: '#8b5cf6'
+    });
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Contraseña incorrecta',
+      text: 'La contraseña no coincide.',
+      confirmButtonColor: '#ef4444'
+    });
+  }
+}
+
+function register(event) {
+  event.preventDefault();
+
+  const usuario = document.getElementById('reg-usuario').value;
+  const password = document.getElementById('reg-password').value;
+
+  if (localStorage.getItem(usuario)) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Usuario ya existe',
+      text: 'El nombre de usuario ya está registrado.',
+      confirmButtonColor: '#ef4444'
+    });
+    return;
+  }
+
+  const usuarioData = {
+    password: password
+  };
+  localStorage.setItem(usuario, JSON.stringify(usuarioData));
+
+  Swal.fire({
+    icon: 'success',
+    title: '¡Cuenta creada!',
+    text: 'Tu cuenta ha sido registrada correctamente.',
+    confirmButtonColor: '#22c55e'
+  }).then(() => {
+    showLogin();
+  });
+}
     function recover(event) {
       event.preventDefault();
       Swal.fire({
